@@ -44,7 +44,7 @@ public:
             nfa_dict[std::to_string(state_map[state_name])]["ending"].push_back(state_name == final_state ? "true" : "false");
         }
 
-        nfaTable(state_map);
+        // nfaTable(state_map);
 
         return nfa_dict;
     }

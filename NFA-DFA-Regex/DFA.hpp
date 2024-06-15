@@ -3,11 +3,24 @@ class DFA {
 public:
     using DFATransitionTable = std::unordered_map<State, std::unordered_map<std::string,State>>;
 
+    DFA() = default;
+
     DFA(const NFA& nfa) {
         convertFromNFA(nfa);
+        // mooreMinimization();
+    }
+
+    void minimize() {
         mooreMinimization();
     }
-    std::unordered_map<State, std::unordered_map<std::string,State>> dfaStruct() {
+
+    void setDFA(const DFATransitionTable& states, const State& start, const StateSet& acceptings) {
+        this->states = states;
+        this->start_state = start;
+        this->accepting_states = acceptings;
+    }
+
+    std::pair<std::unordered_map<State ,int>,std::unordered_map<State, std::unordered_map<std::string,State>>> dfaStruct(int s = 0) const {
         std::vector<State> dfa_states;
         for (const auto& state_pair : this->states) {
             dfa_states.push_back(state_pair.first);
@@ -36,10 +49,7 @@ public:
             dfa_dict[std::to_string(state_map[state])]["ending"] = "true";
         }
 
-    
-        dfaTable(state_map);
-
-        return dfa_dict;
+        return {state_map,dfa_dict};
     }
 
     void dfaTable(std::unordered_map<State ,int>& state_map) const {
@@ -78,6 +88,53 @@ public:
         return accepting_states.find(current_state) != accepting_states.end();
     }
 
+    void csvToDFA(const std::string& filename) {
+        DFATransitionTable states;
+        State start_state;
+        StateSet accepting_states;
+
+        std::ifstream file(filename);
+        if (!file.is_open()) {
+            throw std::runtime_error("Could not open file");
+        }
+
+        std::string line, word;
+        bool header = true;
+
+        while (std::getline(file, line)) {
+            if (header) {
+                header = false;
+                continue;
+            }
+
+            std::stringstream ss(line);
+            std::vector<std::string> row;
+            while (std::getline(ss, word, ',')) {
+                row.push_back(word);
+            }
+            if (row.size() != 5) {
+                throw std::runtime_error("Invalid CSV format");
+            }
+
+            State state = row[0];
+            std::string symbol = row[1];
+            State next_state = row[2];
+            bool is_start = (row[3] == "true");
+            bool is_accepting = (row[4] == "true");
+
+            states[state][symbol] = next_state;
+            if (is_start) {
+                start_state = state;
+            }
+            if (is_accepting) {
+                accepting_states.insert(state);
+            }
+        }
+        file.close();
+
+        setDFA(states, start_state, accepting_states);
+    }
+     
 private:
     DFATransitionTable states;
     StateSet accepting_states;  
@@ -258,5 +315,4 @@ private:
         }
         accepting_states = new_accepting_states;
     }
-
 };
