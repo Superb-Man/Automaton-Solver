@@ -10,10 +10,30 @@ This it is a basic regular expression to DFA converter based on the coursework o
 ```
 # Screenshots 
 ```
-- abstract syntax tree
+- abstract syntax tree for a+b*(c+de)*f
 ```
 ![parse_tree](https://github.com/Superb-Man/TOC-Solver/assets/104999005/712e82c1-dd5b-45ca-86ce-908cc339030f)
 ```
-- min dfa
+- nfa and min dfa
 ```
-![dfa](https://github.com/Superb-Man/TOC-Solver/assets/104999005/46493bd9-71ea-44c0-8d7c-799811e44dd8)
+![nfa](https://github.com/Superb-Man/TOC-Solver/assets/104999005/8e5830b0-b362-4b17-9d07-2ce72645fa99)
+![dfa_moore_minimizedTable](https://github.com/Superb-Man/TOC-Solver/assets/104999005/fa69ec28-4a37-4003-b11d-fdac50c6e1e9)
+![dfa_moore_minimized](https://github.com/Superb-Man/TOC-Solver/assets/104999005/41afb480-46b1-4611-a332-8c00197e0016)
+
+```
+- CYK simulation for the CFG
+- S -> A B | B C
+- A -> B A | a
+- B -> C C | b
+- C -> A B | a
+```
+![cyk_table](https://github.com/Superb-Man/TOC-Solver/assets/104999005/7d0666ad-9aea-4959-b7e5-0fc6f4331df8)
+
+# Will try to implement 
+```
+- CFG To CNF
+- CFG to PDA
+- CFG to LL(K)
+- Left factoring and Left recursion elimination
+- Computing first and follow sets
+```
