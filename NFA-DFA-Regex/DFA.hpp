@@ -76,6 +76,10 @@ public:
     }
 
     bool match(const std::string& input) const {
+        //for empty string
+        if (input.empty()) {
+            return accepting_states.find(start_state) != accepting_states.end();
+        }
         std::string current_state = start_state;
         for (const char& symbol : input) {
             auto it = states.find(current_state);

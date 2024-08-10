@@ -16,7 +16,7 @@ This it is a basic regular expression to DFA converter based on the coursework o
 ```
 - nfa and min dfa
 ```
-![nfa](https://github.com/Superb-Man/TOC-Solver/assets/104999005/8e5830b0-b362-4b17-9d07-2ce72645fa99)
+![nfa](https://github.com/user-attachments/assets/7079e41f-bd83-4aea-96c7-7ccbe1e022ad)
 ![dfa_moore_minimizedTable](https://github.com/Superb-Man/TOC-Solver/assets/104999005/fa69ec28-4a37-4003-b11d-fdac50c6e1e9)
 ![dfa_moore_minimized](https://github.com/Superb-Man/TOC-Solver/assets/104999005/41afb480-46b1-4611-a332-8c00197e0016)
 

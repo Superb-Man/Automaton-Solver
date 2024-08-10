@@ -252,8 +252,10 @@ int main() {
         
         
         std::string input ;
+        std::cout << "Write `empty` for empty string test\n" ;
         std::cout << "Enter the input string : ";
         std::cin >> input;
+        if (input == "empty") input = "";
         (dfa.match(input)) ? std::cout << "Matched\n" : std::cout << "Not Matched\n";
         std::cout << "\n\n\n\n\n\n" ;
     }

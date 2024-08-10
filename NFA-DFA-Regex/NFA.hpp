@@ -28,7 +28,7 @@ public:
 
         std::unordered_map<State ,int> state_map = StateToNumber(nfa_states);
         std::unordered_map<State, std::unordered_map<std::string, std::vector<State>>> nfa_dict;
-        nfa_dict["start"][""] = {std::to_string(state_map[starting_state])};
+        nfa_dict["start"][""] = {starting_state};
         
         for (const auto& state_pair : states) {
             const auto& state_name = state_pair.first;
@@ -37,11 +37,11 @@ public:
             for (const auto& transition_pair : transitions) {
                 std::string symbol = transition_pair.first.empty() ? "epsilon" : transition_pair.first;
                 for (const auto& next_state : transition_pair.second) {
-                    nfa_dict[std::to_string(state_map[state_name])][symbol].push_back(std::to_string(state_map[next_state]));
+                    nfa_dict[state_name][symbol].push_back(next_state);
                 }
             }
 
-            nfa_dict[std::to_string(state_map[state_name])]["ending"].push_back(state_name == final_state ? "true" : "false");
+            nfa_dict[state_name]["ending"].push_back(state_name == final_state ? "true" : "false");
         }
 
         // nfaTable(state_map);
