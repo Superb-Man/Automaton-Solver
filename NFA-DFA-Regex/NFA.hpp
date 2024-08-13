@@ -29,12 +29,19 @@ public:
         std::unordered_map<State ,int> state_map = StateToNumber(nfa_states);
         std::unordered_map<State, std::unordered_map<std::string, std::vector<State>>> nfa_dict;
         nfa_dict["start"][""] = {starting_state};
+
+        // Add all states to the dictionary
         
         for (const auto& state_pair : states) {
             const auto& state_name = state_pair.first;
             const auto& transitions = state_pair.second;
 
-            for (const auto& transition_pair : transitions) {
+            // Add all transitions to the dictionary
+            // If the transition is empty, use "epsilon" as the symbol
+            // If the state is the final state, add "true" to the ending list
+            // Otherwise, add "false"
+
+            for (const auto& transition_pair : transitions) { 
                 std::string symbol = transition_pair.first.empty() ? "epsilon" : transition_pair.first;
                 for (const auto& next_state : transition_pair.second) {
                     nfa_dict[state_name][symbol].push_back(next_state);
@@ -86,6 +93,18 @@ private:
     State starting_state;
     State final_state;
     TransitionTable states;
+    /**
+     * @brief Construct a NFA from an AST
+     * Process the AST recursively and construct the NFA
+     * 
+     * 
+     * @param node 
+     * @param starting_state 
+     * @param final_state 
+     * @param states 
+     */
+    
+    
 
     void construct_NFA(const std::shared_ptr<AstNode>& node, State& starting_state, State& final_state, TransitionTable& states) {
         if (auto literal_node = std::dynamic_pointer_cast<LiteralCharacterAstNode>(node)) {

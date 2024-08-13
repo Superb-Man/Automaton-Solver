@@ -1,5 +1,22 @@
 #include "parser.hpp"
 
+//CFG
+
+// R -> U
+// U -> U '|' C
+// U -> C
+// C -> C K
+// C -> K
+// K -> S '*'
+// K -> S '+'
+// K -> S
+// S -> '(' R ')'
+// S -> LITERAL
+// S -> epsilon
+
+//studied in compiler design
+
+
 class ParseRegex {
 private:
     std::vector<Token> tokenStream;
