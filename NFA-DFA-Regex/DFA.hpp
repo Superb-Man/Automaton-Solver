@@ -375,26 +375,34 @@ private:
 
 
     std::vector<StateSet> refine_partition(std::vector<StateSet>& P) {  
+
+        //optimized
+
         bool partitions_changed;
         do {
             partitions_changed = false;
             std::vector<StateSet> new_P;
 
+            std::unordered_map<State,int> s2p ;
+
+            for(int i = 0 ; i < P.size() ; i++) {
+                for (const auto& state : P[i]) {
+                    s2p[state] = i;
+                }
+            }
+
+
             for (const auto& group : P) { // For each group in the current partition
                 std::unordered_map<std::string, StateSet> partition_map; // Map of transitions to the next partition
 
-                for (const auto& state : group) { // Create map of transitions to the next partition
-                    std::string key;
+                for (const auto& state : group) { // For each state in the group 
+                    std::ostringstream ks ; // Create a key for the map
                     
-                    for (const auto& [symbol, next_state] : states[state]) { // For each transition
-                        for (size_t i = 0; i < P.size(); ++i) { // Find the next partition
-                            if (P[i].find(next_state) != P[i].end()) { // If the next state is in the partition
-                                key += std::to_string(i) + "-" + symbol + ";"; // Add the transition to the key
-                                break;
-                            }
-                        }
+                    for (const auto& [symbol, next_state] : states[state]) { // For each transition in the state 
+                        ks << s2p[next_state] << "-" << symbol << ";"; // Add the transition to the key
+
                     }
-                    partition_map[key].insert(state); // Add the state to the partition
+                    partition_map[ks.str()].insert(state); // Add the state to the partition
                 }
                 // debug
                 // for (const auto& [key, partition] : partition_map) {
@@ -404,7 +412,7 @@ private:
                 //     }
 
                 //     std::cout << std::endl;
-                // 2.b
+                // 
 
                 for (const auto& partition : partition_map) { // Create a new partition based on the map
                     new_P.push_back(partition.second); // Add the partition to the new partition

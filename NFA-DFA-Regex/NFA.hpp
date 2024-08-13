@@ -97,6 +97,23 @@ private:
      * @brief Construct a NFA from an AST
      * Process the AST recursively and construct the NFA
      * 
+     * Procedure
+     * 1. If the node is a literal character, create a starting state and a final state
+     *   and add a transition from the starting state to the final state with the character
+     * 2. If the node is a plus node, create a sub NFA for the left and right nodes
+     *  and add transitions from the starting state to the left starting state
+     * and from the left final state to the right starting state
+     * and from the right final state to the final state
+     * 3. If the node is a sequence node, create a sub NFA for the left and right nodes
+     * and add transitions from the left final state to the right starting state
+     * 4. If the node is an or node, create a sub NFA for the left and right nodes
+     * and add transitions from the starting state to the left and right starting states
+     * and from the left and right final states to the final state
+     * 5. If the node is a star node, create a sub NFA for the left node
+     * and add transitions from the starting state to the left starting state
+     * and from the left final state to the right starting state
+     * and from the right final state to the final state
+     * 
      * 
      * @param node 
      * @param starting_state 
@@ -104,7 +121,7 @@ private:
      * @param states 
      */
     
-    
+
 
     void construct_NFA(const std::shared_ptr<AstNode>& node, State& starting_state, State& final_state, TransitionTable& states) {
         if (auto literal_node = std::dynamic_pointer_cast<LiteralCharacterAstNode>(node)) {
@@ -151,6 +168,7 @@ private:
             State left_starting_state, left_final_state;
             State right_starting_state, right_final_state;
             TransitionTable left_states, right_states;
+
 
             construct_NFA(or_node->left, left_starting_state, left_final_state, left_states);
             construct_NFA(or_node->right, right_starting_state, right_final_state, right_states);
