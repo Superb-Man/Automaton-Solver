@@ -12,7 +12,7 @@ This it is a basic regular expression to DFA converter based on the coursework o
 ```
 - abstract syntax tree for a+b*(c+de)*f
 ```
-![parse_tree](https://github.com/Superb-Man/TOC-Solver/assets/104999005/712e82c1-dd5b-45ca-86ce-908cc339030f)
+![parse_tree](https://github.com/user-attachments/assets/9b9c334c-b232-47f7-aafc-0fedce4560c1)
 ```
 - nfa and min dfa
 ```

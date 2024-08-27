@@ -179,36 +179,6 @@ void draw_dfaTable(const  std::pair<std::unordered_map<State ,int>,std::unordere
     system(command.c_str());
 }
 
-
-
-
-void save_json_NFA(const std::unordered_map<std::string, std::unordered_map<std::string, std::vector<std::string>>>& nfa, const std::string& filename) {
-    json nfa_json;
-    for (const auto& state : nfa) {
-        for (const auto& transition : state.second) {
-            for (const auto& next_state : transition.second) {
-                nfa_json[state.first][transition.first].push_back(next_state);
-            }
-        }
-    }
-
-    std::ofstream file(filename);
-    file << nfa_json.dump(4);
-    file.close();
-}
-void save_json_DFA(const  std::pair<std::unordered_map<State ,int>,std::unordered_map<State, std::unordered_map<std::string,State>>>& dfa, const std::string& filename) {
-    json dfa_json;
-    for (const auto& state : dfa.second) {
-        for (const auto& transition : state.second) {
-            dfa_json[state.first][transition.first] = transition.second;
-        }
-    }
-
-    std::ofstream file(filename);
-    file << dfa_json.dump(4);
-    file.close();
-}
-
 void display_image(const std::string& filename) {
     std::string image_file = filename + ".png";
     std::string command = "xdg-open " + image_file;
@@ -229,7 +199,7 @@ int main() {
 
         drawParseTree(root, "parse_tree");
         auto nfa_dict = nfa.nfaStruct() ;
-        save_json_NFA(nfa_dict, "nfa.json");
+        // save_json_NFA(nfa_dict, "nfa.json");
 
         // // Draw NFA and display
         draw_nfa(nfa_dict, "nfa");

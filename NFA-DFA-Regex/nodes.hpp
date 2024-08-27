@@ -32,7 +32,7 @@ public:
         this->right = right;
     }
     std::string getLabel() const override {
-        return ".";
+        return "&";
     }
 
 
