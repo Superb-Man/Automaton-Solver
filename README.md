@@ -1,6 +1,4 @@
 This is a basic regular expression to DFA converter based on the coursework of theory of computation.Implemented ```*,+,Seq,OR``` as we weren't taught about ```(.,[],-,^,?)``` in that course. 
-However now implementing a full scope regular expression solver for 
-making a lexical analysis of a C program here in this repo : https://github.com/Superb-Man/Lexical_Analyzer
 # Features
 ```
 - It takes an input as expression and parse it.
