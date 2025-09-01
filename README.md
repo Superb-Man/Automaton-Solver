@@ -37,3 +37,11 @@ This is a basic regular expression to DFA converter based on the coursework of t
 - Left factoring and Left recursion elimination
 - Computing first and follow sets
 ```
+# Usage
+```
+- To run the NFA-DFA-Regex tests   =  ./regex_test <regex> <input1> <input2> ...
+
+- To run the CFG-CYK tests = ./cfg_draw <cfg_file> <string1> 
+
+- To create images for dfa-nfa     = ./dfa_draw
+```

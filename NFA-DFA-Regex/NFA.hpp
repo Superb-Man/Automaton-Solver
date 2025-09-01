@@ -120,9 +120,6 @@ private:
      * @param final_state 
      * @param states 
      */
-    
-
-
     void construct_NFA(const std::shared_ptr<AstNode>& node, State& starting_state, State& final_state, TransitionTable& states) {
         if (auto literal_node = std::dynamic_pointer_cast<LiteralCharacterAstNode>(node)) {
             starting_state = generateState();

@@ -191,6 +191,8 @@ int main() {
         std::cout << "Enter the regex : ";
         std::cin >> regex;
 
+        if (regex == ":q") break ;
+
         auto tokenStream = lexer(regex);
         auto parser = ParseRegex(tokenStream);
         std::shared_ptr<AstNode> root = parser.parse();
@@ -222,14 +224,14 @@ int main() {
         std::string command = "rm -f parse_tree.dot nfa.dot dfa.dot nfa.json dfa.json dfa_moore_minimized.json dfa_moore_minimized.dot dfa_moore_minimizedTable.dot dfa_moore_minimizedTable.json";
         system(command.c_str());
         
-        
         std::string input ;
-        std::cout << "Write `empty` for empty string test\n" ;
-        std::cout << "Enter the input string : ";
-        std::cin >> input;
-        if (input == "empty") input = "";
-        (dfa.match(input)) ? std::cout << "Matched\n" : std::cout << "Not Matched\n";
-        std::cout << "\n\n\n\n\n\n" ;
+        do {
+            std::cout << "Enter the input string : ";
+            std::cin >> input;
+            if (input == "empty") input = "";
+            (dfa.match(input)) ? std::cout << "Matched\n" : std::cout << "Not Matched\n";
+            std::cout << "\n\n\n\n\n\n" ;
+        } while (input != ":q");
     }
 
     return 0;

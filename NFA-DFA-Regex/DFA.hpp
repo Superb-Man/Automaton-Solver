@@ -26,7 +26,6 @@ public:
      * @param s 
      * @return std::pair<std::unordered_map<State ,int>,std::unordered_map<State, std::unordered_map<std::string,State>>> 
      */
-
     std::pair<std::unordered_map<State ,int>,std::unordered_map<State, std::unordered_map<std::string,State>>> dfaStruct(int s = 0) const {
         std::vector<State> dfa_states;
         for (const auto& state_pair : this->states) { 
@@ -99,7 +98,6 @@ public:
      * @return true 
      * @return false 
      */
-
     bool match(const std::string& input) const {
         //for empty string
         if (input.empty()) {
@@ -186,7 +184,6 @@ private:
      * @param state 
      * @return StateSet 
      */
-
     StateSet epsilonClosure(const TransitionTable& nfa, const State& state) const {
         
         // Initialize an empty set to store the closure
@@ -250,7 +247,6 @@ private:
      * 
      * @param nfa 
      */
-
     // Convert NFA to DFA
     void convertFromNFA(const NFA& nfa) {
 
@@ -341,7 +337,6 @@ private:
      * 
      * @return std::vector<StateSet> 
      */
-
     std::vector<StateSet> initialize() {
         std::vector<StateSet> P = {accepting_states};
         StateSet non_accepting_states;
@@ -372,8 +367,6 @@ private:
      * @param P 
      * @return std::vector<StateSet> 
      */
-
-
     std::vector<StateSet> refine_partition(std::vector<StateSet>& P) {  
 
         //optimized
@@ -443,8 +436,6 @@ private:
      * @param P 
      * @return std::pair<DFATransitionTable,std::unordered_map<State, State>> 
      */
-
-
     std::pair<DFATransitionTable,std::unordered_map<State, State>> createNewDFA(std::vector<StateSet>& P) {
 
         DFATransitionTable new_states;
@@ -480,8 +471,6 @@ private:
      * @param representative 
      * @return StateSet 
      */
-
-
     StateSet updateDFA(DFATransitionTable& new_states,std::unordered_map<State, State>& representative) {
 
         // Update DFA states and accepting states
@@ -511,8 +500,6 @@ private:
      * 4. Update DFA states and accepting states
      * 
      */
-
-    
     void mooreMinimization() {
         // 1. Initialize partitions with accepting and non-accepting states
         std::vector<StateSet> P = initialize();
